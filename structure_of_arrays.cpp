@@ -5,7 +5,7 @@
 //     int x, y, z;
 // };
 // Array of structs: xyzxyzxyz
-// Struct of Arrays: xxxyyyzzz
+// Struct of arrays: xxxyyyzzz
 //
 // Note that alignment isnt respected
 
@@ -37,17 +37,17 @@ struct SoA {
 };
 
 int main() {
-    struct Test {
+    struct Oof {
         int x;
         char y;
         int z;
     };
 
-    SoA<Test, 4> test;
-    static_assert(test.byte_offset(&Test::x, 0) == 0);
-    static_assert(test.byte_offset(&Test::y, 0) == sizeof(int) * 4);
-    static_assert(test.byte_offset(&Test::y, 2) == sizeof(int) * 4 + sizeof(char) * 2);
-    static_assert(test.byte_offset(&Test::z, 3) == offsetof(Test, z) * 4 + sizeof(int) * 3);
+    SoA<Oof, 4> oof;
+    static_assert(oof.byte_offset(&Test::x, 0) == 0);
+    static_assert(oof.byte_offset(&Test::y, 0) == sizeof(int) * 4);
+    static_assert(oof.byte_offset(&Test::y, 2) == sizeof(int) * 4 + sizeof(char) * 2);
+    static_assert(oof.byte_offset(&Test::z, 3) == offsetof(Oof, z) * 4 + sizeof(int) * 3);
 
     return 0;
 }

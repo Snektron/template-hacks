@@ -21,14 +21,14 @@ auto bind_member(T* t, R(T::*fn)(Args...)) {
 }
 
 int main() {
-    struct Test {
-        int test(int x) {
+    struct Oof {
+        int oof(int x) {
             return 10 * x;
         }
-    } test;
+    } oof;
 
-    assert(bind_member(test, &Test::test)(10) == 100);
-    assert(bind_member(&test, &Test::test)(5) == 50);
+    assert(bind_member(oof, &Oof::oof)(10) == 100);
+    assert(bind_member(&oof, &Oof::oof)(5) == 50);
 
     return 0;
 }

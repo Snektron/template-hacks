@@ -4,8 +4,8 @@
 #include <cassert>
 
 // Class we want to access
-class A {
-    int a = 10;
+class Oof {
+    int oof = 10;
 };
 
 // Base storage for the eventual value pointer to a private variable
@@ -30,17 +30,17 @@ struct private_access_init
 template <typename AccessTag, typename AccessTag::type field>
 private_access_init<AccessTag, field> private_access_init<AccessTag, field>::instance;
 
-struct A_tag {
-    using type = int A::*;
+struct Oof_tag {
+    using type = int Oof::*;
 };
 
 // Explicitly instantiate the template
 // C++ allows fetching pointers to private members during explicit template instantiation
 // We will use this to bypass the private access modifier in a type-safe manner
-template struct private_access_init<A_tag, &A::a>;
+template struct private_access_init<Oof_tag, &Oof::oof>;
 
 int main() {
-    A a;
-    assert(a.*private_access<A_tag>::value == 10);
+    Oof oof;
+    assert(oof.*private_access<Oof_tag>::value == 10);
     return 0;
 }
